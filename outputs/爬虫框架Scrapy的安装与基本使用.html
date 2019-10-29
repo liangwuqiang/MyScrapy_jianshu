@@ -1,0 +1,89 @@
+<section class="ouvJEz"><h1 class="_1RuRku">爬虫框架Scrapy的安装与基本使用</h1><div class="rEsl9f"><div class="s-dsoj"><span class="_3tCVn5"><i aria-label="ic-diamond" class="anticon"><svg width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><use xlink:href="#ic-diamond"></use></svg></i><span>1</span></span><time datetime="2018-07-20T04:25:56.000Z">2018.07.20 12:25:56</time><span>字数 2216</span><span>阅读 38414</span></div></div><article class="_2rhmJa"><blockquote><p><b>概括：上一节学习了pyspider框架，这一节我们来看一下Scrapy的强大之处。</b><b>他应该是目前python使用的最广泛的爬虫框架。</b></p></blockquote><p><b>一、简单实例，了解基本。</b></p><p><b>1、安装Scrapy框架</b></p><p>这里如果直接pip3 install scrapy可能会出错。</p><p>所以你可以先安装lxml：pip3 install lxml(已安装请忽略)。</p><p>安装pyOpenSSL：在官网下载wheel文件。</p><p>安装Twisted：在官网下载wheel文件。</p><p>安装PyWin32：在官网下载wheel文件。</p><p>下载地址：https://www.lfd.uci.edu/~gohlke/pythonlibs/</p><p>配置环境变量：将scrapy所在目录添加到系统环境变量即可。</p><p>ctrl+f搜索即可。</p><p>最后安装scrapy，pip3 install scrapy</p><p><b>2、创建一个scrapy项目</b></p><p>新创建一个目录，按住shift-右键-在此处打开命令窗口</p><p>输入：scrapy startproject tutorial即可创建一个tutorial文件夹</p><p>文件夹目录如下：</p><blockquote>
+<p>|-tutorial</p>
+<p>|-scrapy.cfg</p>
+<p>  |-__init__.py</p>
+<p>  |-items.py</p>
+<p>  |-middlewares.py</p>
+<p>  |-pipelines.py</p>
+<p>  |-settings.py</p>
+<p>  |-spiders</p>
+<p>    |-__init__.py</p>
+</blockquote><p><b>文件的功能：</b></p><p>scrapy.cfg：配置文件</p><p>spiders：存放你Spider文件，也就是你爬取的py文件</p><p>items.py：相当于一个容器，和字典较像</p><p>middlewares.py：定义Downloader Middlewares(下载器中间件)和Spider Middlewares(蜘蛛中间件)的实现</p><p>pipelines.py:定义Item Pipeline的实现，实现数据的清洗，储存，验证。</p><p>settings.py：全局配置</p><p><b>3、创建一个spider（自己定义的爬虫文件）</b></p><p>例如以爬取猫眼热映口碑榜为例子来了解一下：</p><p>在spiders文件夹下创建一个maoyan.py文件，你也可以按住shift-右键-在此处打开命令窗口，输入：scrapy genspider 文件名 要爬取的网址。</p><p>自己创建的需要自己写，使用命令创建的包含最基本的东西。</p><p>我们来看一下使用命令创建的有什么。</p><div class="image-package">
+<div class="image-container" style="max-width: 573px; max-height: 264px;">
+
+<div class="image-view" data-width="573" data-height="264"><img src="images/ee6c501610cf955ab28773faee6212030ce7d608.jpg" width="573" height="264" format="image/png" filesize="10489"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>介绍一下这些是干嘛的：</p><p>name：是项目的名字</p><p>allowed_domains：是允许爬取的域名，比如一些网站有相关链接，域名就和本网站不同，这些就会忽略。</p><p>atart_urls：是Spider爬取的网站，定义初始的请求url，可以多个。</p><p>parse方法：是Spider的一个方法，在请求start_url后，之后的方法，这个方法是对网页的解析，与提取自己想要的东西。</p><p>response参数：是请求网页后返回的内容，也就是你需要解析的网页。</p><p>还有其他参数有兴趣可以去查查。</p><p><b>4、定义Item</b></p><p>item是保存爬取数据的容器，使用的方法和字典差不多。</p><p>我们打开items.py，之后我们想要提取的信息有：</p><p>index(排名)、title(电影名)、star(主演)、releasetime(上映时间)、score(评分)</p><p>于是我们将items.py文件修改成这样。</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 226px;">
+
+<div class="image-view" data-width="758" data-height="226"><img src="images/d57f817e851689ee5126cb24b0b2648f93375b3b.jpg" width="758" height="226" format="image/png" filesize="12301"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>即可。</p><p><b>5、再次打开spider来提取我们想要的信息</b></p><p>修改成这样：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 399px;">
+
+<div class="image-view" data-width="1080" data-height="399"><img src="images/b4cddf0f2a040653b318ad5445aec28e136af4ea.jpg" width="1080" height="399" format="image/jpeg" filesize="53873"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>好了，一个简单的爬虫就写完了。</p><p><b>6、运行</b></p><p>在该文件夹下，按住shift-右键-在此处打开命令窗口，输入：scrapy crawl maoyan(项目的名字)</p><p>即可看到：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 580px;">
+
+<div class="image-view" data-width="1080" data-height="580"><img src="images/d0e92a0d4c3bfb2c4f3db750b9b2e6838e6bc41e.jpg" width="1080" height="580" format="image/jpeg" filesize="107723"></div>
+</div>
+<div class="image-caption"></div>
+</div><p><b>7、保存</b></p><p>我们只运行了代码，看看有没有报错，并没有保存。</p><p>如果我们想保存为csv、xml、json格式，可以直接使用命令：</p><p>在该文件夹下，按住shift-右键-在此处打开命令窗口，输入：</p><p>scrapy crawl maoyan -o maoyan.csv</p><p>scrapy crawl maoyan -o maoyan.xml</p><p>scrapy crawl maoyan -o maoyan.json</p><p>选择其中一个即可。当然如果想要保存为其他格式也是可以的，这里只说常见的。这里选择json格式，运行后会发现，在文件夹下多出来一个maoyan.json的文件。打开之后发现，中文都是一串乱码，这里需要修改编码方式，当然也可以在配置里修改</p><p>（在settings.py文件中添加FEED_EXPORT_ENCODING='UTF8'即可），</p><p>如果想直接在命令行中修改：</p><p>scrapy crawl maoyan -o maoyan.json -s FEED_EXPORT_ENCODING=UTF8</p><p>即可。</p><p>这里自己试试效果吧。</p><p>当然我们保存也可以在运行的时候自动保存，不需要自己写命令。后面介绍（我们还有还多文件没有用到呦）。</p><p><b>二、scrapy如何解析？</b></p><p>之前写过一篇文章：<a href="http://mp.weixin.qq.com/s?__biz=MzU0NDg3NDg0Ng==&amp;mid=2247483766&amp;idx=1&amp;sn=86d61115ebb7a4083e17a54f1acffdf1&amp;chksm=fb74c947cc03405122d74b1172a9a96ef35af65753666f3f7900a9318290c4326736c2d6e69e&amp;scene=21#wechat_redirect" target="_blank" rel="nofollow">三大解析库的使用</a></p><p>但是scrapy也提供了自己的解析方式（Selector），和上面的也很相似，我们来看一下：</p><p><b>1、css</b></p><p>首先需要导入模块：from scrapy import Selector</p><p>例如有这样一段html代码：</p><p>html='&lt;html&gt;&lt;head&gt;&lt;title&gt;Demo&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;div class='cla'&gt;This is Demo&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</p><p><b>1.1、首先需要构建一个Selector对象</b></p><p>sel = Selector(html)</p><p>text = sel.css('.cla::text').extract_first()</p><p>.cla表示选中上面的div节点，::text表示获取文本，这里和以前的有所不同。</p><p>extract_first()表示返回第一个元素，因为上述 sel.css('.cla::text')返回的是一个列表，你也可以写成sel.css('.cla::text')[0]来获取第一个元素，但是如果为空，就会报出超出最大索引的错误，不建议这样写，而使用extract_first()就不会报错，同时如果写成extract_first('123')这样，如果为空就返回123</p><p><b>1.2、</b>有了选取第一个，就有选取所有：extract()表示选取所有，如果返回的是多个值，就可以是这样写。</p><p><b>1.3、</b>获取属性就是sel.css('.cla::sttr('class')').extract_first()表示获取class</p><p><b>1.4、</b>获取指定属性的文本：sel.css('div[class="cla"]::text')</p><p><b>1.5、</b>其他写法和css的写法如出一辙。</p><p><b>1.6、</b>在scrapy中为我们提供了一个简便的写法，在上述的简单实例中，我们知道了response为请求网页的返回值。</p><p>我们可以直接写成：response.css()来解析，提取我们想要的信息。同样，下面要说的XPath也可以直接写成：</p><p>response.xpath()来解析。</p><p><b>2、Xpath</b></p><p>Xpath的使用可以看上面的文章：<a href="http://mp.weixin.qq.com/s?__biz=MzU0NDg3NDg0Ng==&amp;mid=2247483766&amp;idx=1&amp;sn=86d61115ebb7a4083e17a54f1acffdf1&amp;chksm=fb74c947cc03405122d74b1172a9a96ef35af65753666f3f7900a9318290c4326736c2d6e69e&amp;scene=21#wechat_redirect" target="_blank" rel="nofollow">三大解析库的使用</a></p><p>注意：获取的还是列表，所以还是要加上extract_first()或者extract()</p><p><b>3、正则匹配(这里用response操作)</b></p><p>例如：response.css('a::text').re('写正则')</p><p>这里如果response.css('a::text')匹配的是多个对象，那么加上正则也是匹配符合要求的多个对象。</p><p>这里如果想要匹配第一个对象，可以把re()修改成re_first()即可。</p><p><b>注意：response不可以直接调用re(),response.xpath('.').re()可以相当于达到直接使用正则的效果</b>。</p><p>正则的使用：<a href="http://mp.weixin.qq.com/s?__biz=MzU0NDg3NDg0Ng==&amp;mid=2247483727&amp;idx=1&amp;sn=1fc19af2291177ac3c1a832c47392a3f&amp;chksm=fb74c97ecc0340681bc54c97ceb7bba413da3f1ca6fc3a107bbdabe7eb9be144c261a6de347d&amp;scene=21#wechat_redirect" target="_blank" rel="nofollow">万能的正则表达式</a></p><p><b>三、Dowmloader Middleware的使用</b></p><p>本身scrapy就提供了很多Dowmloader Middleware，但是有时候我们要修改，</p><p>比如修改User-Agent，使用代理ip等。</p><p>以修改User-Agent为例（设置代理ip大同小异）：</p><p>第一种方法，可以在settings.py中直接添加USER-AGENT='xxx'</p><p>但是我们想要添加多个User-Agent，每次随机获取一个可以利用Dowmloader Middleware来设置。</p><p>第一步将settings中的USER-AGENT='xxx'修改成USER-AGENT=["xxx","xxxxx","xxxxxxx"]</p><p>第二步在middlewares.py中添加：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 287px;">
+
+<div class="image-view" data-width="1062" data-height="287"><img src="images/3fc6f35c2a7a9709ceeb754e31e778ec3ca99750.jpg" width="1062" height="287" format="image/png" filesize="19133"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>from_crawler():通过参数crawler可以拿到配置的信息，我们的User-Agent在配置文件里，所以我们需要获取到。</p><p>方法名不可以修改。</p><p>第三步在settings.py中添加：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 110px;">
+
+<div class="image-view" data-width="914" data-height="110"><img src="images/c39758c3663a1f565c648608a42976f4502ee5cb.jpg" width="914" height="110" format="image/png" filesize="5150"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>将scrapy自带的UserAgentmiddleware的键值设置为None,</p><p>自定义的设置为400，这个键值越小表示优先调用的意思。</p><p><b>四、Item Pipeline的使用。</b></p><p><b>1、进行数据的清洗</b></p><p>在一的实例中我们把评分小于等于8.5分的score修改为（不好看！），我们认为是不好看的电影，我们将pipeline.py修改成这样：</p><div class="image-package">
+<div class="image-container" style="max-width: 678px; max-height: 306px;">
+
+<div class="image-view" data-width="678" data-height="306"><img src="images/6089919d75419359c4248c6cee3b879f867d9224.jpg" width="678" height="306" format="image/png" filesize="7034"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>在setting.py中添加：</p><div class="image-package">
+<div class="image-container" style="max-width: 580px; max-height: 78px;">
+
+<div class="image-view" data-width="580" data-height="78"><img src="images/e68f8af4e7ddf25069b8e2fae7287d6d33dfa318.jpg" width="580" height="78" format="image/png" filesize="5871"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>我们执行一下：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 460px;">
+
+<div class="image-view" data-width="1029" data-height="460"><img src="images/cf770d1bd04cd3ecb2e57cd58b715f6ac5519dae.jpg" width="1029" height="460" format="image/jpeg" filesize="91210"></div>
+</div>
+<div class="image-caption"></div>
+</div><p><b>2、储存</b></p><p><b>2.1储存为json格式</b></p><p>我们将pipeline.py修改成这样：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 564px;">
+
+<div class="image-view" data-width="860" data-height="564"><img src="images/0b6de61cdabbf1b50d6d16166eaccd424d87e04f.jpg" width="860" height="564" format="image/jpeg" filesize="76827"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>在setting.py中添加：</p><div class="image-package">
+<div class="image-container" style="max-width: 616px; max-height: 100px;">
+
+<div class="image-view" data-width="616" data-height="100"><img src="images/24bf1c36f93914db4c88d88055e4d7943a0702d3.jpg" width="616" height="100" format="image/png" filesize="7382"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>表示先执行TextPipeline方法，再执行JsonPipeline方法，先清洗，再储存。</p><p><b>2.2储存在mysql数据库</b></p><p>首先在mysql数据库中创建一个数据库maoyanreying，创建一个表maoyan。</p><p>我们将pipeline.py修改成这样：</p><div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 634px;">
+
+<div class="image-view" data-width="1015" data-height="634"><img src="images/00c0b6aeb57a062e1f12cf34e2abf6a43738465b.jpg" width="1015" height="634" format="image/jpeg" filesize="102252"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>在setting.py中添加：</p><div class="image-package">
+<div class="image-container" style="max-width: 566px; max-height: 218px;">
+
+<div class="image-view" data-width="566" data-height="218"><img src="images/8931dde04e6fb289b1b69053e4ab5896a9da913d.jpg" width="566" height="218" format="image/png" filesize="5142"></div>
+</div>
+<div class="image-caption"></div>
+</div><p>即可</p><p>完。</p></article><div></div><div class="_19DgIp" style="margin-top:24px;margin-bottom:24px"></div></section>
