@@ -10,5 +10,9 @@ import scrapy
 
 class MyscrapyJianshuItem(scrapy.Item):
     # define the fields for your item here like:
+    url = scrapy.Field()
+    title = scrapy.Field()
+    content = scrapy.Field()
+    image_srcs = scrapy.Field()
     image_urls = scrapy.Field()
     pass
