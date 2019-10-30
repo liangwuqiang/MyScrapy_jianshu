@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="773efcd3-4dc9-4dc4-902f-22bb0aff49fc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyScrapy_jianshu/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyScrapy_jianshu/items.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyScrapy_jianshu/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyScrapy_jianshu/pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyScrapy_jianshu/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyScrapy_jianshu/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyScrapy_jianshu/spiders/jianshu.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyScrapy_jianshu/spiders/jianshu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Python正则表达式.html" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Python正则表达式.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/清华北大学霸学习方法（思维导图总结）.html" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/清华北大学霸学习方法（思维导图总结）.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/~$框架Scrapy的安装与基本使用.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/~$：爬取简书之多线程爬取（一）.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/爬虫框架Scrapy的安装与基本使用.html" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/爬虫框架Scrapy的安装与基本使用.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scrapy.log" beforeDir="false" afterPath="$PROJECT_DIR$/scrapy.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

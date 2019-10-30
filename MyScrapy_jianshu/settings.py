@@ -67,7 +67,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'MyScrapy_jianshu.pipelines.MyscrapyJianshuPipeline': 300,
-   'MyScrapy_jianshu.pipelines.MyImagesPipeline': 100,
+   'MyScrapy_jianshu.pipelines.MyImagesPipeline': 400,
 }
 IMAGES_URLS_FIELD = 'image_urls'
 IMAGES_STORE = r'./outputs/images'

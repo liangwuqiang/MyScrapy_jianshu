@@ -14,26 +14,32 @@ from urllib import parse
 
 class MyscrapyJianshuPipeline(object):
     def process_item(self, item, spider):
-        url = item['url']
-        title = item['title']
+        print('process_item 在运行')
+        try:
+            url = item['url']
+            title = item['title']
+            content = item['content']
 
-        content = item['content']
-        for image_src in item['image_srcs']:
-            site = 'https://www.jianshu.com/'
-            image_url = parse.urljoin(site, image_src)
-            # 用哈希码替换正文中图片的url，因为默认下载的图片文件名是哈希码
-            image_name = 'images/' + self.sha1(image_url) + '.jpg'
-            content = content.replace(image_src, image_name)
-        # 否则图片显示位置不正确
-        pattern = '<div class="image-container-fill" style="padding-bottom: \d+\.\d+%;"></div>'
-        content = re.sub(pattern=pattern, repl='', string=content)
-        # 否则图片不显示
-        pattern = 'data-original-'
-        content = re.sub(pattern=pattern, repl='', string=content)
+            item['image_urls'] = []  # 完整路径
+            for image_src in item['image_srcs']:
+                site = 'https://www.jianshu.com/'
+                image_url = parse.urljoin(site, image_src)
+                item['image_urls'].append(image_url)
+                # 用哈希码替换正文中图片的url，因为默认下载的图片文件名是哈希码
+                image_name = 'images/' + self.sha1(image_url) + '.jpg'
+                content = content.replace(image_src, image_name)
+            # 否则图片显示位置不正确
+            pattern = '<div class="image-container-fill" style="padding-bottom: \d+\.\d+%;"></div>'
+            content = re.sub(pattern=pattern, repl='', string=content)
+            # 否则图片不显示
+            pattern = 'data-original-'
+            content = re.sub(pattern=pattern, repl='', string=content)
 
-        filename = 'outputs/' + title + '.html'
-        with codecs.open(filename, 'w', 'utf-8') as f:
-            f.write(self.html_format(url, title, content))
+            filename = 'outputs/' + title + '.html'
+            with codecs.open(filename, 'w', 'utf-8') as f:
+                f.write(self.html_format(url, title, content))
+        except Exception as e:
+            print('process_item出错', e)
         return item
 
     @staticmethod

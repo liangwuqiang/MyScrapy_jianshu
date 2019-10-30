@@ -29,11 +29,6 @@ class JianshuSpider(scrapy.Spider):
             item['title'] = title
             item['content'] = content
             item['image_srcs'] = image_srcs  # 不完整路径，用于查找替换图片链接
-            item['image_urls'] = []  # 完整路径
-            for image_src in image_srcs:
-                site = 'https://www.jianshu.com/'
-                image_url = parse.urljoin(site, image_src)
-                item['image_urls'].append(image_url)
 
             yield item
             print(title)
